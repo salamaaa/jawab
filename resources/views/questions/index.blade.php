@@ -13,9 +13,14 @@
                             <div class="media">
                                 <div class="media-body">
                                     <h3 class="mt-0">
-                                        {{$question->title}}
+                                        <a href="{{$question->url}}">{{$question->title}}</a>
                                     </h3>
-                                    {{\Illuminate\Support\Str::limit($question->body,250)}}
+                                    <p class="leading-7">{{\Illuminate\Support\Str::limit($question->body,250)}}</p>
+                                    <div class="flex justify-between items-center">
+                                         <a href="{{$question->user->url}}"
+                                            class="hover:no-underline hover:text-blue-600 font-bold text-lg">{{$question->user->name}}</a>
+                                        <small class="text-gray-600">{{$question->created_at->diffForHumans()}}</small>
+                                    </div>
                                 </div>
                             </div>
                             @if(!$loop->last)
