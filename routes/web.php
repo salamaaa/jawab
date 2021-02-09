@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth'])->group(function (){
 //    Questions routes
-
+Route::resource('questions',QuestionController::class);
 
 });
 
