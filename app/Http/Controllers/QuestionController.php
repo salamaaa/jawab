@@ -7,52 +7,66 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $questions = Question::latest()->paginate(6);
-        return view('questions.index',compact('questions'));
+        return view('questions.index', compact('questions'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('questions.create');
     }
 
-    public function store(Request $request){
-        $this->validate($request,[
-           'title'=>['required','string','max:255'],
-           'body'=>['required']
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required']
         ]);
         Question::create([
-           'user_id'=>auth()->id(),
-            'title'=>$request->title,
-            'body'=>$request->body
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'body' => $request->body
         ]);
 
         return redirect()->route('questions.index');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $question = Question::find($id);
-        return view('questions.show',compact('question'));
+        return view('questions.show', compact('question'));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $question = Question::find($id);
-        return view('questions.edit',compact('question'));
+        return view('questions.edit', compact('question'));
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required']
+        ]);
+
+        Question::find($id)->update([
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
+
+        return back();
 
     }
 
-    public function destroy($id){
-
+    public function destroy($id)
+    {
+        $question = Question::find($id);
+        $question->delete();
+        return redirect('questions');
     }
-
-
-
-
-
-
 
 
 }
