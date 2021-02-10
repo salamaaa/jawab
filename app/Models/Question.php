@@ -23,4 +23,15 @@ class Question extends Model
     public function getUrlAttribute(){
         return route('questions.show',$this->id);
     }
+
+    public function getStatusAttribute(){
+        if($this->answers > 0 ){
+            if ($this->best_answer_id){
+                return 'bg-green-500 border text-white';
+            }
+            return 'p-1 border-2 border-green-500 text-green-500';
+        }
+        return 'border-none';
+    }
+
 }
