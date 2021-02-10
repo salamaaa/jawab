@@ -15,11 +15,11 @@ use App\Http\Controllers\QuestionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('questions');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('questions');
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function (){
