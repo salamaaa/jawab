@@ -5,8 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card mb-3">
-                    <div class="card-header">
-                        All Questions
+                    <div class="card-header flex items-center justify-between">
+                        <h3>All Questions</h3>
+                        <a class="hover:no-underline hover:bg-blue-700 border rounded p-1 bg-blue-600 text-white"
+                           href="{{route('questions.create')}}">
+                            Ask a Question
+                        </a>
                     </div>
                     <div class="card-body">
                         @foreach($questions as $question)

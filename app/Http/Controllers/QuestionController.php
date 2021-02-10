@@ -17,7 +17,17 @@ class QuestionController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request,[
+           'title'=>['required','string','max:255'],
+           'body'=>['required']
+        ]);
+        Question::create([
+           'user_id'=>auth()->id(),
+            'title'=>$request->title,
+            'body'=>$request->body
+        ]);
 
+        return redirect()->route('questions.index');
     }
 
     public function show($id){
