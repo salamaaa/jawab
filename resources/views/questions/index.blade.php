@@ -22,7 +22,7 @@
                                     </div>
                                     <div class="block mb-5 status {{$question->status}}">
                                         <strong
-                                            class="block text-2xl">{{$question->answers}}</strong>{{\Illuminate\Support\Str::plural('answer',$question->answers)}}
+                                            class="block text-2xl">{{$question->answers_count}}</strong>{{\Illuminate\Support\Str::plural('answer',$question->answers_count)}}
                                     </div>
                                     <div class="text-gray-600">
                                         {{$question->views .' '.\Illuminate\Support\Str::plural('view',$question->views)}}
