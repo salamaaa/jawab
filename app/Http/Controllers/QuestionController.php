@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\This;
 
 class QuestionController extends Controller
 {
@@ -41,7 +42,9 @@ class QuestionController extends Controller
 
     public function edit($id)
     {
+
         $question = Question::find($id);
+        $this->authorize('update',$question);
         return view('questions.edit', compact('question'));
     }
 
@@ -64,6 +67,7 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::find($id);
+        $this->authorize('delete',$question);
         $question->delete();
         return redirect('questions');
     }
