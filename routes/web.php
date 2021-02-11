@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
+use App\Models\Question;
+use App\Models\User;
+use App\Models\Answer;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,10 @@ use App\Http\Controllers\QuestionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test',function (){
+   return Question::find(1)->answers;
+});
 
 Route::get('/', function () {
     return redirect('questions');

@@ -18,7 +18,7 @@
                                 <div class="d-flex flex-column mr-32 text-sm text-center">
                                     <div class="w-30 h-30">
                                         <strong
-                                            class="block text-2xl">{{$question->votes}}</strong>{{\Illuminate\Support\Str::plural('vote',$question->answers)}}
+                                            class="block text-2xl">{{$question->votes}}</strong>{{\Illuminate\Support\Str::plural('vote',$question->votes)}}
                                     </div>
                                     <div class="block mb-5 status {{$question->status}}">
                                         <strong
