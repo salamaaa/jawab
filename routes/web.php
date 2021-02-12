@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Models\Question;
@@ -19,6 +20,14 @@ use App\Models\Answer;
 
 Route::get('/test',function (){
    return Question::find(1)->answers;
+});
+
+Route::post('/createAnswer',function (){
+   Answer::create([
+       'user_id'=>Auth::id(),
+       'question_id'=> 1,
+       'body'=>'What a Great Question!'
+   ]);
 });
 
 Route::get('/', function () {

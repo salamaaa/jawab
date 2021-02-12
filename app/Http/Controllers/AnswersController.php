@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnswersController extends Controller
 {
@@ -32,9 +34,16 @@ class AnswersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+
+        $this->validate($request,[
+           'answer'=>['required']
+        ]);
+        Answer::create([
+            'user_id'=>Auth::id(),
+
+        ]);
     }
 
     /**

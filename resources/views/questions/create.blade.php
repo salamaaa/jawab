@@ -19,11 +19,9 @@
                     <span class="text-red-700">@error('title') {{$message}} @enderror</span>
                 </div>
                 <div class="relative">
-                    <textarea rows="10" id="body" name="body" placeholder="Question"
+                    <textarea rows="10" id="body" name="body" placeholder="Question here.."
                               class="w-full mb-4 mr-4 text-gray-800 bg-gray-100 border rounded-lg focus:border-gray-500 bg-white focus:ring-0"
-                              required>
-
-                    </textarea>
+                              required></textarea>
                     <span class="text-red-700">@error('body') {{$message}} @enderror</span>
                 </div>
                 <div class="flex justify-center">
