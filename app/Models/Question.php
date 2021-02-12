@@ -37,12 +37,4 @@ class Question extends Model
         }
         return 'border-none';
     }
-
-    public static function boot(){
-        parent::boot();
-        static::created(function($answer){
-            $answer->question->increment('answers_count');
-        });
-    }
-
 }

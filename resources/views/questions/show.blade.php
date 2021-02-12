@@ -7,30 +7,18 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="media">
-                            <div class="d-flex flex-column mr-32 text-sm text-center vote-controls">
-                               {{-- <div class="w-30 h-30">
-                                    <strong
-                                        class="block text-2xl">{{$question->votes}}</strong>{{\Illuminate\Support\Str::plural('vote',$question->votes)}}
-                                </div>
-                                <div class="block mb-5 status {{$question->status}}">
-                                    <strong
-                                        class="block text-2xl">{{$question->answers()->count()}}</strong>{{\Illuminate\Support\Str::plural('answer',$question->answers()->count())}}
-                                </div>
-                                <div class="text-gray-600">
-                                    {{$question->views .' '.\Illuminate\Support\Str::plural('view',$question->views)}}
-                                </div>--}}
-
+                            <div class="d-flex flex-column mr-32 text-sm text-center ">
                                 <a title="This question is useful" class="vote-up">
-                                    Vote up
+                                    <i class="fas fa-caret-up fa-3x cursor-pointer text-gray-700"></i>
                                 </a>
-                                <span class="votes-count">123</span>
+                                <span class="votes-count text-xl font-bold">{{$question->votes}}</span>
                                 <a title="This question is useless" class="vote-down off">
-                                    Vote Down
+                                    <i class="fas fa-caret-down fa-3x cursor-pointer text-gray-700"></i>
                                 </a>
                                 <a title="Mark as Favourite (Click again to undo) " class="favourite">
-                                    Favourite
+                                    <i class="fas fa-star fa-2x cursor-pointer text-yellow-300"></i>
                                 </a>
-                                <span class="favourite-count">12</span>
+                                <span class="favourite-count font-bold">12</span>
                             </div>
                             <div class="media-body">
                                 <div class="flex justify-between items-center">
@@ -59,7 +47,8 @@
                                 <div class="flex justify-between items-center">
                                     <div class="flex justify-center">
                                         <a href="{{$question->user->url}}" class="pr-2">
-                                            <img src="{{$question->user->avatar}}" alt="{{$question->user->name}}'s image">
+                                            <img src="{{$question->user->avatar}}"
+                                                 alt="{{$question->user->name}}'s image">
                                         </a>
                                         <a href="{{$question->user->url}}"
                                            class="hover:no-underline hover:text-blue-600 font-bold text-lg">{{$question->user->name}}
@@ -80,34 +69,61 @@
                     <div
                         class="card-header">{{$question->answers->count() ." ". \Illuminate\Support\Str::plural('answer',$question->answers->count())}} </div>
                     <div class="card-body">
-                        @foreach($question->answers as $answer)
-                            <div class="card-text text-gray-900">{{$answer->body}}</div>
-                            <div class="flex justify-between">
-                                <div class="media mt-2">
-                                    <a href="{{$answer->user->url}}" class="pr-2">
-                                        <img src="{{$answer->user->avatar}}" alt="{{$answer->user->name}}'s image">
-                                    </a>
-                                    <div class="media-body mt-1">
-                                        <a href="{{$answer->user->url}}">{{$answer->user->name}}</a>
+                       @if(!$question->answers->count())
+                            <div class="panel panel-default">
+                                <div class="panel-body text-center">No Answers yet!</div>
+                            </div>
+                        @else
+                            @foreach($question->answers as $answer)
+                                <div class=" flex justify-between items-center">
+                                    <div class="d-flex flex-column mr-32 text-sm text-center ">
+                                        <a title="This question is useful" class="vote-up">
+                                            <i class="fas fa-caret-up fa-3x cursor-pointer text-gray-700"></i>
+                                        </a>
+                                        <span class="votes-count text-xl font-bold">{{$answer->votes_count}}</span>
+                                        <a title="This question is useless" class="vote-down off">
+                                            <i class="fas fa-caret-down fa-3x cursor-pointer text-gray-700"></i>
+                                        </a>
+                                        <a title="Mark this answer as best answer (Click again to undo) " class="best_answer">
+                                            <i class="fas fa-check fa-2x cursor-pointer text-green-600"></i>
+                                        </a>
+                                        <span class="best_answer_count font-bold">5</span>
+                                    </div>
+
+                                    <div>
+                                        <div class="card-text text-gray-900">{{$answer->body}}</div>
+                                        <div class="flex justify-between">
+                                            <div class="media mt-2">
+                                                <a href="{{$answer->user->url}}" class="pr-2">
+                                                    <img src="{{$answer->user->avatar}}"
+                                                         alt="{{$answer->user->name}}'s image">
+                                                </a>
+                                                <div class="media-body mt-1">
+                                                    <a href="{{$answer->user->url}}">{{$answer->user->name}}</a>
+                                                </div>
+                                            </div>
+                                            <div>
+                                            <span
+                                                class="text-gray-500 text-xs">
+                                                {{$answer->created_at->diffForHumans()}}
+                                            </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                        <span class="text-gray-500 text-xs">
-                                            {{$answer->created_at->diffForHumans()}}
-                                        </span>
-                                </div>
-                            </div>
-                            @if(!$loop->last)
-                                <hr>
-                            @endif
-                        @endforeach
+                                @if(!$loop->last)
+                                    <hr>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <form action="" method="POST">
-                    <textarea class="w-1/2 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="2"
-                              placeholder="Answers here.."></textarea>
+                    <textarea class="w-full py-2 text-gray-700 border rounded-lg focus:outline-none" rows="5"
+                              placeholder="Answer here.."></textarea>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+
