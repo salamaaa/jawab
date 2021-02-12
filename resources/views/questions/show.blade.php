@@ -7,8 +7,8 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="media">
-                            <div class="d-flex flex-column mr-32 text-sm text-center">
-                                <div class="w-30 h-30">
+                            <div class="d-flex flex-column mr-32 text-sm text-center vote-controls">
+                               {{-- <div class="w-30 h-30">
                                     <strong
                                         class="block text-2xl">{{$question->votes}}</strong>{{\Illuminate\Support\Str::plural('vote',$question->votes)}}
                                 </div>
@@ -18,7 +18,19 @@
                                 </div>
                                 <div class="text-gray-600">
                                     {{$question->views .' '.\Illuminate\Support\Str::plural('view',$question->views)}}
-                                </div>
+                                </div>--}}
+
+                                <a title="This question is useful" class="vote-up">
+                                    Vote up
+                                </a>
+                                <span class="votes-count">123</span>
+                                <a title="This question is useless" class="vote-down off">
+                                    Vote Down
+                                </a>
+                                <a title="Mark as Favourite (Click again to undo) " class="favourite">
+                                    Favourite
+                                </a>
+                                <span class="favourite-count">12</span>
                             </div>
                             <div class="media-body">
                                 <div class="flex justify-between items-center">
@@ -55,6 +67,7 @@
                                     </div>
                                     <small class="text-gray-600">{{$question->created_at->diffForHumans()}}</small>
                                 </div>
+
                             </div>
                         </div>
                     </div>
