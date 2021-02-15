@@ -55,10 +55,11 @@ class QuestionController extends Controller
             'body' => ['required']
         ]);
 
-        Question::find($id)->update([
-            'title' => $request->title,
-            'body' => $request->body
-        ]);
+       $question = Question::find($id);
+       $this->authorize('update',$question);
+       $question->title = $request->title;
+       $question->body = $request->body;
+       $question->save();
 
         return back();
 

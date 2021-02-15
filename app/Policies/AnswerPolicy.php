@@ -11,40 +11,6 @@ class AnswerPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Answer  $answer
-     * @return mixed
-     */
-    public function view(User $user, Answer $answer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
-     */
-    public function create(User $user)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
@@ -53,7 +19,7 @@ class AnswerPolicy
      */
     public function update(User $user, Answer $answer)
     {
-        //
+        return $user->id === $answer->user_id;
     }
 
     /**
@@ -65,7 +31,7 @@ class AnswerPolicy
      */
     public function delete(User $user, Answer $answer)
     {
-        //
+        return $user->id === $answer->user_id;
     }
 
     /**

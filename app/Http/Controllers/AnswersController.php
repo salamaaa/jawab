@@ -3,30 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AnswersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,48 +18,35 @@ class AnswersController extends Controller
      */
     public function store(Request $request,$id)
     {
-
-        $this->validate($request,[
-           'answer'=>['required']
-        ]);
         Answer::create([
             'user_id'=>Auth::id(),
-
+            'question_id'=>$id,
+            'body'=>$request->body
         ]);
+
+        return redirect()->route('questions.show',$id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+
+    public function edit($q_id,$a_id)
     {
-        //
+        $question = Question::find($q_id);
+        $answer = Answer::find($a_id);
+
+        return view('answers.edit',['question'=>$question,'answer'=>$answer]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request, $q_id,$a_id)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+
+        $answer = Answer::find($a_id);
+        $this->authorize('update',$answer);
+        $answer->body = $request->body;
+        $answer->save();
+
+        return redirect()->route('question.answer.edit',[$q_id,$a_id]);
     }
 
     /**
@@ -86,8 +55,10 @@ class AnswersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($q_id,$a_id)
     {
-        //
+        $answer =  Answer::find($a_id);
+        $answer->delete();
+        return redirect()->route('questions.show',$q_id);
     }
 }
